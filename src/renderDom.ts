@@ -1,7 +1,7 @@
 const getRandomSize = (multiplier: number) =>
   Math.floor((0.5 + Math.random()) * multiplier);
 
-const items = Array(20)
+const items = Array(6)
   .fill(0)
   .map(() => {
     const width = getRandomSize(500);
@@ -22,11 +22,7 @@ const renderItem = (
   column: number,
 ) => {
   return `
-    <div 
-      class="h-fit"
-      data-row-index="${row}"
-      data-column-index="${column}"
-    >
+    <div class="h-fit">
       <div class="flex flex-col bg-neutral-200 transition-all duration-500" style="opacity: 0; transform: translateY(40px)">
         <img src="${item.imageUrl}" width=${item.dimensions.width} height=${item.dimensions.height} class="w-full h-auto" />
         <div class="p-4">
@@ -46,10 +42,13 @@ export function renderDom(margin: number) {
   document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <div 
       id="masonry-root"
-      class="md:mx-4 mx-16 md:grid grid-cols-3 mt-[500px]"
+      class="md:mx-4 mx-16 md:grid grid-cols-3"
       style="gap: ${margin}px"
     >
       ${items.map((item, index) => renderItem(item, Math.floor(index / 3), index % 3)).join("")}
+    </div>
+    <div>
+      Hello
     </div>
   `;
 }
